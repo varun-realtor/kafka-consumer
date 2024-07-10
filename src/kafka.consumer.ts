@@ -1,6 +1,14 @@
 import { PrismConsumer, AvroRecord } from "@dataengineering/prism-consumer-nestjs";
 import { Injectable } from "@nestjs/common";
 
+function logCurrentTime() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    return`${hours}-${minutes}-${seconds}`;
+}
 
 @Injectable()
 export class KafkaConsumer implements PrismConsumer {
@@ -37,6 +45,12 @@ export class KafkaConsumer implements PrismConsumer {
     console.log("event-recived-time", tc.getTime() )
 
     console.log("transit-time", tc.getTime() - t1 )
+    
+    console.log("`")
+    console.log("`")
+    console.log(`~~~~~~~~~~~~~~~ Space Between Each Events ~~~~~~~~~~~~~~~~(${logCurrentTime()})`)
+    console.log("`")
+    console.log("`")
     return;
   }
 }
